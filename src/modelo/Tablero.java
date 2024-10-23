@@ -3,10 +3,11 @@ package modelo;
 import modelo.Casilla;
 
 public class Tablero {
-    private Casilla[][] casillas;
+    private Casilla[][] tablero;
+
 
     public Tablero() {
-        casillas = new Casilla[8][8];
+        tablero = new Casilla[8][8];
         iniciarTablero();
     }
 
@@ -15,9 +16,9 @@ public class Tablero {
 
     // Iniciamos la posición inicial de cada ficha
     public void iniciarTablero() {
-       for (int i = 0; i < casillas.length; i++) {
-           for (int j = 0; j < casillas[i].length; j++) {
-                   casillas[i][j] = new Casilla();
+       for (int i = 0; i < tablero.length; i++) {
+           for (int j = 0; j < tablero[i].length; j++) {
+                   tablero[i][j] = new Casilla();
            }
        }
 
@@ -37,7 +38,7 @@ public class Tablero {
     public void colocarFilaConPiezas(int fila, String[] piezas, String color ) {
         for (int col = 0; col < 8; col++) {
             Ficha ficha = new Ficha(piezas[col], color);
-            casillas[fila][col].setFicha(ficha);
+            tablero[fila][col].setFicha(ficha);
         }
     }
 
@@ -45,7 +46,20 @@ public class Tablero {
     public void colocarFilaPeones(int fila, String color) {
         for ( int col = 0; col < 8; col++) {
             Ficha peon = new Ficha("P", color);
-            casillas[fila][col].setFicha(peon);
+            tablero[fila][col].setFicha(peon);
         }
     }
+
+    public int getFilas() {
+        return tablero.length;
+    }
+
+    public int getColumnas() {
+        return tablero[0].length;
+    }
+
+    public Casilla getCasilla (int fila, int columna) {
+        return tablero[fila][columna];
+    }
+
 }
