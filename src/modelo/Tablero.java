@@ -6,6 +6,7 @@ public class Tablero {
     private Casilla[][] tablero;
 
 
+
     public Tablero() {
         tablero = new Casilla[8][8];
         iniciarTablero();
@@ -16,22 +17,25 @@ public class Tablero {
 
     // Iniciamos la posición inicial de cada ficha
     public void iniciarTablero() {
+        String[] posicionLetra = {"a","b","c","d","e","f","g","h"};
        for (int i = 0; i < tablero.length; i++) {
            for (int j = 0; j < tablero[i].length; j++) {
-                   tablero[i][j] = new Casilla();
+               tablero[i][j] = new Casilla();
+               String posicion = posicionLetra[j] + (8 - 1);
+               tablero[i][j].setId(posicion);
            }
        }
 
-        // Colocamos las piezas de las primera fila par ambos colores
+        // Colocamos las piezas de las primera fila para ambos colores
         String[] piezasIniciales = {"T", "C", "A", "D", "R", "A", "C", "T"};
 
         // Definir la posición de las piezas blancas
-        colocarFilaConPiezas(0, piezasIniciales, "blanco");
-        colocarFilaPeones(0, "blanco");
+        colocarFilaConPiezas(0, piezasIniciales, "w");
+        colocarFilaPeones(1, "w");
 
         // Definir la posición de las piezas blancas
-        colocarFilaConPiezas(7, piezasIniciales, "negro");
-        colocarFilaPeones(6, "negro");
+        colocarFilaConPiezas(7, piezasIniciales, "b");
+        colocarFilaPeones(6, "b");
     }
 
     // Metodo para colocar la fila de piezas principales

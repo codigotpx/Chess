@@ -7,7 +7,7 @@ public class Main {
         // Crear el marco
         JFrame marco = new JFrame();
         marco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        marco.setSize(1000, 800);
+        marco.setSize(600, 800);
         marco.setLocationRelativeTo(null);
 
         // Crear y configurar el controlador principal

@@ -1,5 +1,6 @@
 package vista;
 
+import funcionalidades.CargarImagen;
 import modelo.Casilla;
 import modelo.Tablero;
 
@@ -7,44 +8,68 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PanelJuego extends JPanel {
-    private JPanel panelJuego;
     private Tablero tablero;
+    private CargarImagen cargarImagen;
 
-    public PanelJuego(Tablero tablero) {
+    public PanelJuego(Tablero tablero, CargarImagen cargarImagen) {
         this.tablero = tablero;
+        this.cargarImagen = cargarImagen;
     }
 
     @Override
-    public void paint(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        // Definimos el lado que ocupara el tablero
-        int ladoTablero = Math.min(getWidth() / 2, getHeight());
-        int tamañoCelda = ladoTablero / tablero.getFilas();
+        int tamañoTablero = 400;
+        int tamañoCelda = tamañoTablero / tablero.getFilas();
 
-        // Condenadas de la esquina suoerior izquierda del tablero
-        int inicioX = 0;
-        int inicioY = 0;
+        int inicioX = (getWidth() - tamañoTablero) / 2;
+        int inicioY = (getHeight() - tamañoTablero) / 2;
 
-
-        // Dibujamos las celdas del tablero
         for (int i = 0; i < tablero.getFilas(); i++) {
             for (int j = 0; j < tablero.getColumnas(); j++) {
-                Casilla casilla = tablero.getCasilla(i,j);
-                // Alternar entre el blanco y el negro
+                Casilla casilla = tablero.getCasilla(i, j);
+
+                // Alternar colores de celda
                 if ((i + j) % 2 == 0) {
-                    g.setColor(Color.WHITE);
+                    g.setColor(new Color(93, 50, 49, 255));
                 } else {
-                    g.setColor(Color.BLACK);
+                    g.setColor(new Color(121, 73, 56, 255));
                 }
-                // Dibujamos el rectangulo de la cerla
                 g.fillRect(inicioX + j * tamañoCelda, inicioY + i * tamañoCelda, tamañoCelda, tamañoCelda);
+
+                // Verificar si la casilla tiene una ficha
+                if (casilla.hasFicha()) {
+                    String tipoFicha = casilla.getFicha().getTipo();
+                    String colorFicha = casilla.getFicha().getColor();
+
+                    // Definimos la ruta de la imagen segun su color
+                    String rutaImagen = "/resources/imagenes/" + colorFicha + "/" + tipoFicha + ".png"; // Especificar ruta según el tipo de ficha
+
+//                    // Puedes usar rutas específicas para cada tipo de ficha
+//                    if ("P".equals(tipoFicha)) {
+//                        rutaImagen = "/resources/imagenes/w/P.png"; // Ejemplo de ruta
+//                    } else if ("T".equals(tipoFicha)) {
+//                        rutaImagen = "ruta/a/imagen_torre.png";
+//                    }
+//                    // ... (agregar rutas para otros tipos de piezas)
+//
+//                    // Cargar y dibujar la imagen de la ficha
+                    Image imagen = cargarImagen.cargarImagen(rutaImagen);
+                    if (imagen != null) {
+                        int fichaX = inicioX + j * tamañoCelda + tamañoCelda / 8;
+                        int fichaY = inicioY + i * tamañoCelda + tamañoCelda / 8;
+                        int fichaTamaño = tamañoCelda * 3 / 4;
+
+                        g.drawImage(imagen, fichaX, fichaY, fichaTamaño, fichaTamaño, this);
+                    }
+                }
             }
         }
     }
 
     @Override
     public Dimension getPreferredSize() {
-        return new Dimension (500, 800);
+        return new Dimension(400, 400);
     }
 }
