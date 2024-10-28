@@ -32,9 +32,9 @@ public class PanelJuego extends JPanel {
 
                 // Alternar colores de celda
                 if ((i + j) % 2 == 0) {
-                    g.setColor(new Color(93, 50, 49, 255));
-                } else {
                     g.setColor(new Color(121, 73, 56, 255));
+                } else {
+                    g.setColor(new Color(93, 50, 49, 255));
                 }
                 g.fillRect(inicioX + j * tamañoCelda, inicioY + i * tamañoCelda, tamañoCelda, tamañoCelda);
 
@@ -46,15 +46,7 @@ public class PanelJuego extends JPanel {
                     // Definimos la ruta de la imagen segun su color
                     String rutaImagen = "/resources/imagenes/" + colorFicha + "/" + tipoFicha + ".png"; // Especificar ruta según el tipo de ficha
 
-//                    // Puedes usar rutas específicas para cada tipo de ficha
-//                    if ("P".equals(tipoFicha)) {
-//                        rutaImagen = "/resources/imagenes/w/P.png"; // Ejemplo de ruta
-//                    } else if ("T".equals(tipoFicha)) {
-//                        rutaImagen = "ruta/a/imagen_torre.png";
-//                    }
-//                    // ... (agregar rutas para otros tipos de piezas)
-//
-//                    // Cargar y dibujar la imagen de la ficha
+                    // Cargar y dibujar la imagen de la ficha
                     Image imagen = cargarImagen.cargarImagen(rutaImagen);
                     if (imagen != null) {
                         int fichaX = inicioX + j * tamañoCelda + tamañoCelda / 8;
