@@ -27,7 +27,7 @@ public class PanelJuego extends JPanel {
         int inicioY = (getHeight() - tamañoTablero) / 2;
 
         for (int i = 0; i < tablero.getFilas(); i++) {
-            for (int j = 0; j < tablero.getColumnas(); j++) {
+            for (int j = 0; j < tablero.getColumnas(i); j++) {
                 Casilla casilla = tablero.getCasilla(i, j);
 
                 // Alternar colores de celda
@@ -40,8 +40,8 @@ public class PanelJuego extends JPanel {
 
                 // Verificar si la casilla tiene una ficha
                 if (casilla.hasFicha()) {
-                    String tipoFicha = casilla.getFicha().getTipo();
-                    String colorFicha = casilla.getFicha().getColor();
+                    String tipoFicha = casilla.getFicha().getNombre();
+                    String colorFicha = casilla.getFicha().gettoString();
 
                     // Definimos la ruta de la imagen segun su color
                     String rutaImagen = "/resources/imagenes/" + colorFicha + "/" + tipoFicha + ".png"; // Especificar ruta según el tipo de ficha
