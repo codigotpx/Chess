@@ -1,5 +1,6 @@
 package controlador;
 
+import modelo.Movimiento;
 import modelo.Tablero;
 import vista.PanelJuego;
 import funcionalidades.CargarImagen;
@@ -18,7 +19,7 @@ public class ControladorPrincipal {
         Tablero tablero = new Tablero();
         CargarImagen cargarImagen = new CargarImagen();
         PanelJuego panelJuego = new PanelJuego(tablero, cargarImagen);
-        ControladorJuego controladorJuego = new ControladorJuego(tablero);
+        ControladorJuego controladorJuego = new ControladorJuego(tablero, panelJuego);
         marco.setContentPane(panelJuego);
     }
 }
